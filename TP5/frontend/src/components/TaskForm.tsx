@@ -51,16 +51,16 @@ export default function TaskForm({
     setFormData(initialState);
   };
   const inputClass =
-    "w-full mt-1 border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-gray-50 focus:bg-white transition-all";
-  const labelClass = "block text-sm font-medium text-gray-700";
+    "w-full mt-1 border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:bg-white dark:focus:bg-gray-600 transition-colors";
+  const labelClass = "block text-sm font-medium text-gray-700 dark:text-gray-300";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 mb-8 grid grid-cols-1 md:grid-cols-2 gap-6"
+      className="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-8 grid grid-cols-1 md:grid-cols-2 gap-6 transition-colors duration-200"
     >
-      <div className="col-span-1 md:col-span-2 border-b border-gray-100 pb-4 mb-2">
-        <h2 className="text-xl font-semibold text-gray-800">
+      <div className="col-span-1 md:col-span-2 border-b border-gray-100 dark:border-gray-700 pb-4 mb-2">
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white transition-colors">
           {editingTask ? "Editar Tarea" : "Nueva Tarea"}
         </h2>
       </div>
@@ -201,7 +201,7 @@ export default function TaskForm({
           <button
             type="button"
             onClick={onCancel}
-            className="px-5 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            className="px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
             Cancelar
           </button>
