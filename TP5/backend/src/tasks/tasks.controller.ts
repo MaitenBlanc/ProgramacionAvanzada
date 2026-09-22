@@ -5,25 +5,30 @@ import { CreateTaskDto } from './dto/create-task.dto.js';
 
 @Controller('tasks')
 export class TasksController {
-    constructor(private readonly taskService: TasksService) { }
+    constructor(private readonly tasksService: TasksService) { }
 
     @Get()
     findAll(): Promise<Task[]> {
-        return this.taskService.findAll();
+        return this.tasksService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.tasksService.findOne(id);
     }
 
     @Post()
     create(@Body() dto: CreateTaskDto): Promise<Task> {
-        return this.taskService.create(dto);
+        return this.tasksService.create(dto);
     }
 
     @Put(':id')
     update(@Param('id', ParseIntPipe) id: number, @Body() dto: Partial<CreateTaskDto>) {
-        return this.taskService.update(id, dto);
+        return this.tasksService.update(id, dto);
     }
 
     @Delete(':id')
     remove(@Param('id', ParseIntPipe) id: number) {
-        return this.taskService.remove(id);
+        return this.tasksService.remove(id);
     }
 }
