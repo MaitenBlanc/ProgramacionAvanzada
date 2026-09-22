@@ -36,7 +36,25 @@ export default function TaskForm({
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let newFormData = { ...formData, [name]: value };
+
+    // Si cambia a "Finalizada" y no hay fecha de cierre, se asigna la fecha actual
+    if (name === "estado" && value === "Finalizada" && !newFormData.fecha_cierre) {
+      newFormData.fecha_cierre = new Date().toISOString().split("T")[0];
+    }
+
+    // Si asigna una fecha de cierre, el estado pasa automáticamente a "Finalizada"
+    if (name === "fecha_cierre" && value !== "") {
+      newFormData.estado = "Finalizada";
+    }
+    
+    // Si quita la fecha de cierre y estaba finalizada, vuelve a "En Progreso"
+    if (name === "fecha_cierre" && value === "" && formData.estado === "Finalizada") {
+      newFormData.estado = "En Progreso";
+    }
+
+    setFormData(newFormData);
   };
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
@@ -171,6 +189,7 @@ export default function TaskForm({
           type="date"
           name="fecha_cierre"
           value={formData.fecha_cierre || ""}
+          min={formData.fecha_creacion}
           onChange={handleChange}
           className={inputClass}
         />
