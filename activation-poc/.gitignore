@@ -1,0 +1,6 @@
+# 1. Dependencias (NUNCA se suben, pesan mucho y se instalan con npm install)
+node_modules/
+
+# 2. Compilados y builds (Se generan automáticamente al compilar NestJS o React)
+dist/
+build/
