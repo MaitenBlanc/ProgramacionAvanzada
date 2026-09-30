@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2 - Programación Avanzada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004085;
+        }
+        p {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>TP2 - Introducción a JavaScript</h1>
+    <p>Abre la <strong>Consola del Desarrollador</strong> en tu navegador para ver los resultados de la ejecución.</p>
+
+    <div class="card">
+        <h3>Sección 01: Objetos</h3>
+        <p>Ejercicios sobre creación, anidación, métodos y manipulación de objetos.</p>
+        <button onclick="cargarScript('1-Ejercicios-objetos.js')">Cargar y Ejecutar Objetos</button>
+    </div>
+
+    <div class="card">
+        <h3>Sección 02: Funciones</h3>
+        <p>Ejercicios sobre funciones, recursividad, closures y callbacks.</p>
+        <button onclick="cargarScript('2-Ejercicios-funciones.js')">Cargar y Ejecutar Funciones</button>
+    </div>
+
+    <div class="card">
+        <h3>Sección 03: Consumo de APIs y Datos</h3>
+        <p>Ejercicios con Fetch, promesas, async/await y manipulación de usuarios.</p>
+        <button onclick="cargarScript('3-Mas-Ejercicios-funciones.js')">Cargar y Ejecutar APIs</button>
+    </div>
+
+    <div class="card">
+        <h3>Sección 04: Operaciones con Arrays</h3>
+        <p>Uso de map, filter, reduce, find, some, every, sort, etc.</p>
+        <button onclick="cargarScript('4-Ejercicios-operaciones-arrays.js')">Cargar y Ejecutar Arrays</button>
+    </div>
+
+    <script>
+        // Función dinámica para inyectar el script seleccionado en el HTML
+        function cargarScript(nombreArchivo) {
+            // Eliminar script anterior si ya existe para evitar acumulación
+            const scriptAnterior = document.getElementById('script-dinamico');
+            if (scriptAnterior) {
+                scriptAnterior.remove();
+            }
+
+            // Crear y agregar el nuevo script
+            const script = document.createElement('script');
+            script.src = nombreArchivo;
+            script.id = 'script-dinamico';
+            
+            script.onload = () => {
+                console.log(`--- Se ejecutó correctamente: ${nombreArchivo} ---`);
+            };
+            
+            script.onerror = () => {
+                console.error(`No se pudo cargar el archivo ${nombreArchivo}. Verifica que el nombre sea exacto.`);
+            };
+
+            document.body.appendChild(script);
+           // alert(`Se cargó el archivo ${nombreArchivo}. Revisa la consola (F12).`);
+        }
+    </script>
+</body>
+</html>
