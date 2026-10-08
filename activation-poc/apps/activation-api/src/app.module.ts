@@ -1,10 +1,33 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { EventsGateway } from './events.gateway';
+import { Activation, ActivationSchema } from './activation.schema';
+import { ProcessedEvent, ProcessedEventSchema } from 'kafka-toolkit';
+
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/activation_db?directConnection=true';
+const brokers = process.env.KAFKA_BROKERS ? process.env.KAFKA_BROKERS.split(',') : ['localhost:9092'];
 
 @Module({
-  imports: [],
+  imports: [
+    MongooseModule.forRoot(mongoUri),
+    MongooseModule.forFeature([
+      { name: Activation.name, schema: ActivationSchema },
+      { name: ProcessedEvent.name, schema: ProcessedEventSchema }
+    ]),
+    ClientsModule.register([
+      {
+        name: 'KAFKA_SERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: { clientId: 'activation-api', brokers: brokers },
+          consumer: { groupId: 'activation-api-group' },
+        },
+      },
+    ]),
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [EventsGateway],
 })
 export class AppModule {}

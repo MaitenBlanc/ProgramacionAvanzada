@@ -1,0 +1,9 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "main": "src/events.ts",
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}

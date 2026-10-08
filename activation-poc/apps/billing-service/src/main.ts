@@ -8,7 +8,7 @@ async function bootstrap() {
     options: {
       client: {
         clientId: 'billing',
-        brokers: ['localhost:9092'], // En docker: 'kafka:9092'
+        brokers: process.env.KAFKA_BROKERS ? process.env.KAFKA_BROKERS.split(',') : ['localhost:9092'], // En docker: 'kafka:9092'
       },
       consumer: {
         groupId: 'billing-consumer-group',

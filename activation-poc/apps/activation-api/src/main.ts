@@ -9,7 +9,7 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
-      client: { clientId: 'activation-api', brokers: ['localhost:9092'] },
+      client: { clientId: 'activation-api', brokers: process.env.KAFKA_BROKERS ? process.env.KAFKA_BROKERS.split(',') : ['localhost:9092'] },
       consumer: { groupId: 'activation-api-group' },
     },
   });

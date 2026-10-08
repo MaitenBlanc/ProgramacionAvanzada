@@ -32,7 +32,9 @@
     "mongoose": "^9.10.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "socket.io": "^4.8.4"
+    "socket.io": "^4.8.4",
+    "kafka-toolkit": "file:../../libs/kafka-toolkit",
+    "contracts": "file:../../libs/contracts"
   },
   "devDependencies": {
     "@nestjs/cli": "^12.0.0",
