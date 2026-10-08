@@ -67,7 +67,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: activation-api
       KAFKA_GROUP_ID: activation-api
-      MONGO_URI: mongodb://mongo:27017/activation_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_ACTIVATION:-mongodb://mongo:27017/activation_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy
@@ -83,7 +83,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: billing-service
       KAFKA_GROUP_ID: billing-svc
-      MONGO_URI: mongodb://mongo:27017/billing_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_BILLING:-mongodb://mongo:27017/billing_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy
@@ -99,7 +99,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: provisioning-service
       KAFKA_GROUP_ID: provisioning-svc
-      MONGO_URI: mongodb://mongo:27017/provisioning_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_PROVISIONING:-mongodb://mongo:27017/provisioning_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy
@@ -115,7 +115,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: notification-service
       KAFKA_GROUP_ID: notification-svc
-      MONGO_URI: mongodb://mongo:27017/notification_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_NOTIFICATION:-mongodb://mongo:27017/notification_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy
@@ -131,7 +131,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: crm-analytics-service
       KAFKA_GROUP_ID: crm-analytics
-      MONGO_URI: mongodb://mongo:27017/crm_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_CRM:-mongodb://mongo:27017/crm_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy
@@ -156,7 +156,7 @@ services:
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: loyalty-service
       KAFKA_GROUP_ID: loyalty-svc
-      MONGO_URI: mongodb://mongo:27017/loyalty_db?replicaSet=rs0
+      MONGO_URI: ${MONGO_URI_LOYALTY:-mongodb://mongo:27017/loyalty_db?replicaSet=rs0}
     depends_on:
       mongo:
         condition: service_healthy

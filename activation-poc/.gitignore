@@ -4,3 +4,7 @@ node_modules/
 # 2. Compilados y builds (Se generan automáticamente al compilar NestJS o React)
 dist/
 build/
+
+
+.env
+!.env.model

@@ -75,3 +75,15 @@ Para la Fase 3 introducimos el `loyalty-service`, configurado para leer los even
    docker compose logs loyalty-service
    ```
 2. **Qué observar:** Verás en los logs que al iniciar el contenedor, procesó **todas las activaciones exitosas** que hiciste en las pruebas de la Fase 1, asignando 100 puntos retroactivamente, sin que los otros microservicios tuvieran que hacer absolutamente nada para avisarle.
+
+### Fase 4: Escenario 6 - Outbox Transaccional con MongoDB Atlas
+**Objetivo:** Demostrar la consistencia garantizada al 100% entre la base de datos (MongoDB Atlas) y el Message Broker (Kafka) ante posibles caídas del sistema utilizando el Patrón Outbox.
+Para la Fase 4 implementamos este patrón en el `activation-api`, el cual ahora cuenta con una conexión nativa a la nube (MongoDB Atlas).
+1. Realiza una activación normal (Camino Feliz) desde la interfaz.
+2. Inicia sesión en tu cuenta de **MongoDB Atlas** y dirígete al panel de **Database**.
+3. Selecciona tu cluster y haz clic en **Browse Collections**.
+4. Busca la base de datos `activation_db`.
+5. **Qué observar:**
+   - Encontrarás la colección `activations` (donde se registró la intención inicial).
+   - Encontrarás una nueva colección llamada `outboxevents`. 
+   - Notarás que el evento de Kafka se guardó primero allí de forma segura en la misma **transacción atómica** que la activación, y que tiene el campo `processed: true`, indicando que el job asíncrono (Cron) de NestJS lo capturó exitosamente y lo publicó en Kafka sin riesgo de pérdida de datos.
